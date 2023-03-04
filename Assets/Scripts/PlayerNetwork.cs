@@ -6,8 +6,13 @@ using Unity.Netcode;
 public class PlayerNetwork : NetworkBehaviour {
   NetworkVariable<int> randNumber = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+  public override void OnNetworkSpawn() {
+    randNumber.OnValueChanged += (int prevVal, int newVal) => {
+      Debug.Log(OwnerClientId + " - " + randNumber.Value);
+    }
+  }
+  
   void Update() {
-    Debug.Log(OwnerClientId + " - " + randNumber.Value);
     if(!IsOwner) return;
 
     if(Input.GetKeyDown(KeyCode.T))
