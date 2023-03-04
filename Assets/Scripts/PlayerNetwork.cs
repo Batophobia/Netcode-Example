@@ -9,7 +9,7 @@ public class PlayerNetwork : NetworkBehaviour {
   public override void OnNetworkSpawn() {
     randNumber.OnValueChanged += (int prevVal, int newVal) => {
       Debug.Log(OwnerClientId + " - " + randNumber.Value);
-    }
+    };
   }
   
   void Update() {
